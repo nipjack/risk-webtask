@@ -1,8 +1,20 @@
+// @flow
 const request = require('request-promise')
 
-function ImperaService (imperausername, imperapassword) {
+export interface Game {
+  id: number,
+  name: string,
+  timeoutSecondsLeft: number,
+  state: string,
+  currentPlayer: {
+    name: string
+  }
+
+}
+
+function ImperaService (imperausername: string, imperapassword: string): { getGames: () => Promise<Game>} {
   let instance = {}
-  instance.getGames = function () {
+  instance.getGames = function (): Promise<Game> {
     return request.post('https://www.imperaonline.de/api/Account/token',
       {
         form: {
@@ -12,19 +24,19 @@ function ImperaService (imperausername, imperapassword) {
           grant_type: 'password'
         }
       })
-            .then(JSON.parse)
-            .then((body) => {
-              let token = body.access_token
-              return request.get('https://www.imperaonline.de/api/games/my', {
-                headers: {
-                  'Authorization': 'Bearer ' + token
-                }
-              })
-            })
-            .then(JSON.parse)
+      .then(JSON.parse)
+      .then((body) => {
+        let token = body.access_token
+        return request.get('https://www.imperaonline.de/api/games/my', {
+          headers: {
+            'Authorization': 'Bearer ' + token
+          }
+        })
+      })
+      .then(JSON.parse)
   }
 
   return instance
 }
 
-module.exports = ImperaService
+module.exports.ImperaService = ImperaService

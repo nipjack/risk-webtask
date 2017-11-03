@@ -1,8 +1,9 @@
+// @flow
 const Promise = require('bluebird')
-const ImperaService = require('./impera/impera')
+const ImperaService = require('./impera/impera').ImperaService
 const TelegramService = require('./telegram/telegram')
 
-module.exports = function (context, req, res) {
+module.exports = function (context: { secrets: any, storage: any }, req: any, res: any) {
   const telegram = TelegramService(context.secrets.telegramapikey)
   const impera = ImperaService(context.secrets.imperausername, context.secrets.imperapassword)
   const getStorage = Promise.promisify(context.storage.get, {context: context.storage})

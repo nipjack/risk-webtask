@@ -5,11 +5,17 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "standard && jest",
+    "test": "standard-flow && flow && jest",
+    "flow": "flow",
     "deploy": "wt create --bundle --secrets-file .env --name impera-status ./index.js"
   },
-  "standard": {
-    "globals": [ "test", "expect", "jest", "beforeEach" ]
+  "standard-flow": {
+    "globals": [
+      "test",
+      "expect",
+      "jest",
+      "beforeEach"
+    ]
   },
   "author": "",
   "license": "ISC",
@@ -20,8 +26,13 @@
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^21.2.0",
+    "babel-preset-flow": "^6.23.0",
     "dotenv": "^4.0.0",
+    "flow-bin": "^0.57.3",
     "jest": "^21.2.1",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "standard-flow": "^1.0.0"
   }
 }

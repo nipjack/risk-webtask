@@ -7,7 +7,7 @@ module.exports = function (text, apikey, chatid) {
 function TelegramService (apikey) {
   let instance = {}
 
-  instance.send = function (chatid, text, parse_mode) {
+  instance.send = function (chatid, text, parsemode) {
     return Promise.resolve()
   }
 

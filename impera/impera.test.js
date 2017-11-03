@@ -1,4 +1,4 @@
-const ImperaService = require('./impera')
+const ImperaService = require('./impera').ImperaService
 require('dotenv').config()
 
 test('call api without pw', () => {
